@@ -17,6 +17,7 @@ defmodule ForumWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :index
+    resources "/comments", CommentController
   end
 
   # Other scopes may use custom stacks.
