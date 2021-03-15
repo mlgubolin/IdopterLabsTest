@@ -18,6 +18,7 @@ defmodule ForumWeb.Router do
 
     get "/", PageController, :index
     resources "/comments", CommentController
+    resources "/threads", ThreadController
   end
 
   # Other scopes may use custom stacks.
@@ -38,6 +39,7 @@ defmodule ForumWeb.Router do
     scope "/" do
       pipe_through :browser
       live_dashboard "/dashboard", metrics: ForumWeb.Telemetry
+
     end
   end
 end
