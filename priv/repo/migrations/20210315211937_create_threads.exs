@@ -6,7 +6,7 @@ defmodule Forum.Repo.Migrations.CreateThreads do
       add :name, :string
       add :title, :string
       add :body, :string
-      add :comments, references(:comment, on_delete: :nothing)
+      add :replies, references(:comments, on_delete: :nothing)
 
       timestamps()
     end

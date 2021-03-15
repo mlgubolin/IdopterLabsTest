@@ -6,7 +6,7 @@ defmodule Forum.Post.Thread do
     field :body, :string
     field :name, :string
     field :title, :string
-    field :comments, :id
+    has_many :replies, Forum.Post.Comment
 
     timestamps()
   end

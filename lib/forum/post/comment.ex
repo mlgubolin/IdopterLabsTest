@@ -5,6 +5,7 @@ defmodule Forum.Post.Comment do
   schema "comments" do
     field :name, :string
     field :reply, :string
+    field :thread_id, :id
 
     timestamps()
   end
