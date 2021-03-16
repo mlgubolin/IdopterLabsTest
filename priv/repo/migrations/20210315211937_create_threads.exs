@@ -6,11 +6,14 @@ defmodule Forum.Repo.Migrations.CreateThreads do
       add :name, :string
       add :title, :string
       add :body, :string
-      add :replies, references(:comments, on_delete: :nothing)
 
       timestamps()
     end
 
-    create index(:threads, [:comments])
+    alter table(:comments) do
+      add :thread_id, references(:threads)
+    end
+
+    create index(:comments, [:thread_id])
   end
 end

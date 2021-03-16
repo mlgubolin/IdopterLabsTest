@@ -1,12 +1,13 @@
 defmodule Forum.Post.Thread do
   use Ecto.Schema
   import Ecto.Changeset
+  alias Forum.Post.Comment
 
   schema "threads" do
     field :body, :string
     field :name, :string
     field :title, :string
-    has_many :replies, Forum.Post.Comment
+    has_many :replies, Comment
 
     timestamps()
   end
