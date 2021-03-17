@@ -14,7 +14,7 @@ defmodule Forum.Post.Comment do
   @doc false
   def changeset(comment, attrs) do
     comment
-    |> cast(attrs, [:name, :reply])
-    |> validate_required([:name, :reply])
+    |> cast(attrs, [:name, :reply, :thread_id])
+    |> validate_required([:name, :reply, :thread_id])
   end
 end
