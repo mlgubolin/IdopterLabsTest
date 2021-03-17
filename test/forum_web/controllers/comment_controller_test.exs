@@ -7,8 +7,15 @@ defmodule ForumWeb.CommentControllerTest do
   @update_attrs %{name: "some updated name", reply: "some updated reply"}
   @invalid_attrs %{name: nil, reply: nil}
 
+  def fixture(:thread) do
+    {:ok, thread} = Post.create_thread(%{name: "John Doe", title: "How do I get this to work?", body: "Please help"})
+    thread
+  end
+
   def fixture(:comment) do
-    {:ok, comment} = Post.create_comment(@create_attrs)
+    thread = fixture(:thread)
+    params = Map.put(@create_attrs, :thread_id, thread.id)
+    {:ok, comment} = Post.create_comment(params)
     comment
   end
 
@@ -28,7 +35,9 @@ defmodule ForumWeb.CommentControllerTest do
 
   describe "create comment" do
     test "redirects to show when data is valid", %{conn: conn} do
-      conn = post(conn, Routes.comment_path(conn, :create), comment: @create_attrs)
+      thread = fixture(:thread)
+      params = Map.put(@create_attrs, :thread_id, thread.id)
+      conn = post(conn, Routes.comment_path(conn, :create), comment: params)
 
       assert %{id: id} = redirected_params(conn)
       assert redirected_to(conn) == Routes.comment_path(conn, :show, id)
@@ -56,7 +65,9 @@ defmodule ForumWeb.CommentControllerTest do
     setup [:create_comment]
 
     test "redirects when data is valid", %{conn: conn, comment: comment} do
-      conn = put(conn, Routes.comment_path(conn, :update, comment), comment: @update_attrs)
+      thread = fixture(:thread)
+      params = Map.put(@update_attrs, :thread_id, thread.id)
+      conn = put(conn, Routes.comment_path(conn, :update, comment), comment: params)
       assert redirected_to(conn) == Routes.comment_path(conn, :show, comment)
 
       conn = get(conn, Routes.comment_path(conn, :show, comment))
@@ -75,6 +86,7 @@ defmodule ForumWeb.CommentControllerTest do
     test "deletes chosen comment", %{conn: conn, comment: comment} do
       conn = delete(conn, Routes.comment_path(conn, :delete, comment))
       assert redirected_to(conn) == Routes.comment_path(conn, :index)
+
       assert_error_sent 404, fn ->
         get(conn, Routes.comment_path(conn, :show, comment))
       end

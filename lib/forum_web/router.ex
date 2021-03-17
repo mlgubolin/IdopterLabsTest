@@ -18,6 +18,7 @@ defmodule ForumWeb.Router do
 
     get "/", PageController, :index
     resources "/comments", CommentController
+    resources "/threads", ThreadController
   end
 
   # Other scopes may use custom stacks.
