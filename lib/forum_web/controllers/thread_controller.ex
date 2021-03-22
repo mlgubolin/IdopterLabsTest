@@ -27,8 +27,11 @@ defmodule ForumWeb.ThreadController do
   end
 
   def show(conn, %{"id" => id}) do
-    thread = Post.get_thread!(id)
-    render(conn, "show.html", thread: thread)
+    thread = id
+    |> Post.get_thread!()
+    |> Forum.Repo.preload(:replies)
+    changeset = %Ecto.Changeset{}
+    render(conn, "show.html", thread: thread, changeset: changeset)
   end
 
   def edit(conn, %{"id" => id}) do

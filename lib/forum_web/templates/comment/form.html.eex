@@ -13,6 +13,8 @@
   <%= text_input f, :reply %>
   <%= error_tag f, :reply %>
 
+  <%= hidden_input f, :thread_id, value: @thread_id %>
+
   <div>
     <%= submit "Save" %>
   </div>
