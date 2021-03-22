@@ -11,13 +11,20 @@ defmodule Forum.PostTest do
     @invalid_attrs %{name: nil, reply: nil}
 
     def thread_fixture_atom(:thread) do
-      {:ok, thread} = Post.create_thread(%{name: "John Doe", title: "How do I get this to work?", body: "Please help"})
+      {:ok, thread} =
+        Post.create_thread(%{
+          name: "John Doe",
+          title: "How do I get this to work?",
+          body: "Please help"
+        })
+
       thread
     end
 
     def comment_fixture(attrs \\ %{}) do
       thread = thread_fixture_atom(:thread)
       params = Map.put(@valid_attrs, :thread_id, thread.id)
+
       {:ok, comment} =
         attrs
         |> Enum.into(params)
@@ -38,7 +45,7 @@ defmodule Forum.PostTest do
 
     test "create_comment/1 with valid data creates a comment" do
       thread = thread_fixture_atom(:thread)
-      params = Map.put @valid_attrs, :thread_id, thread.id
+      params = Map.put(@valid_attrs, :thread_id, thread.id)
       assert {:ok, %Comment{} = comment} = Post.create_comment(params)
       assert comment.name == "some name"
       assert comment.reply == "some reply"
