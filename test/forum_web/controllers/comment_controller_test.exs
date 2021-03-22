@@ -56,7 +56,7 @@ defmodule ForumWeb.CommentControllerTest do
 
     test "renders errors when data is invalid", %{conn: conn} do
       thread = fixture(:thread)
-      conn = post(conn, Routes.comment_path(conn, :create,thread.id), comment: @invalid_attrs)
+      conn = post(conn, Routes.comment_path(conn, :create, thread.id), comment: @invalid_attrs)
       assert html_response(conn, 200) =~ "New Comment"
     end
   end
@@ -97,7 +97,7 @@ defmodule ForumWeb.CommentControllerTest do
 
     test "deletes chosen comment", %{conn: conn, comment: comment} do
       thread = fixture(:thread)
-      conn = delete(conn, Routes.comment_path(conn, :delete, thread.id,comment))
+      conn = delete(conn, Routes.comment_path(conn, :delete, thread.id, comment))
       assert redirected_to(conn) == Routes.comment_path(conn, :index, thread.id)
 
       assert_error_sent 404, fn ->

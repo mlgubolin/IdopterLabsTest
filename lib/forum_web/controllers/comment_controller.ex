@@ -26,18 +26,18 @@ defmodule ForumWeb.CommentController do
     end
   end
 
-  def show(conn, %{"id" => id,"thread_id" => thread_id }) do
+  def show(conn, %{"id" => id, "thread_id" => thread_id}) do
     comment = Post.get_comment!(id)
     render(conn, "show.html", comment: comment, thread_id: thread_id)
   end
 
-  def edit(conn, %{"id" => id,"thread_id" => thread_id }) do
+  def edit(conn, %{"id" => id, "thread_id" => thread_id}) do
     comment = Post.get_comment!(id)
     changeset = Post.change_comment(comment)
     render(conn, "edit.html", comment: comment, changeset: changeset, thread_id: thread_id)
   end
 
-  def update(conn, %{"id" => id, "comment" => comment_params,"thread_id" => thread_id }) do
+  def update(conn, %{"id" => id, "comment" => comment_params, "thread_id" => thread_id}) do
     comment = Post.get_comment!(id)
 
     case Post.update_comment(comment, comment_params) do
@@ -51,7 +51,7 @@ defmodule ForumWeb.CommentController do
     end
   end
 
-  def delete(conn, %{"id" => id,"thread_id" => thread_id}) do
+  def delete(conn, %{"id" => id, "thread_id" => thread_id}) do
     comment = Post.get_comment!(id)
     {:ok, _comment} = Post.delete_comment(comment)
 
