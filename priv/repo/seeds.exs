@@ -13,9 +13,48 @@ alias Forum.Repo
 alias Forum.Post.Thread
 alias Forum.Post.Comment
 
-  Repo.insert! %Thread{
-    title: "Phoenix Framework",
-    name: "aaaa",
-    body: "hgufsahfiadshfisdahfdush",
-    replies: [%Comment{name: "bbbb", reply: "hfdisahfuidghfu"}]
-  }
+Repo.insert!(%Thread{
+  title: "Lorem Ipsum",
+  name: "John",
+  body:
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua...",
+  replies: [
+    %Comment{
+      name: "Mary",
+      reply: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor..."
+    },
+    %Comment{
+      name: "Ana",
+      reply:
+        "incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi..."
+    },
+    %Comment{
+      name: "Vera",
+      reply:
+        "incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi"
+    }
+  ]
+})
+
+Repo.insert!(%Thread{
+  title: "Another Thread",
+  name: "John",
+  body:
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut ...",
+  replies: [
+    %Comment{
+      name: "Mary",
+      reply: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor..."
+    },
+    %Comment{
+      name: "Ana",
+      reply:
+        "incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi..."
+    },
+    %Comment{
+      name: "Vera",
+      reply:
+        "incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi"
+    }
+  ]
+})
